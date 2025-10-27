@@ -1,0 +1,22 @@
+print(3+4)
+print(3-4)
+print(3*4)
+print(3%4)
+print(3/4)
+print(3**4)
+print(3//4)
+
+print('Wagner')
+print('Moreira Cavalcante Junior')
+print('Brasil')
+print('Estou aproveitando o 30 dias de python')
+
+print(type(10))      
+print(type(9.8))
+print(type(3.14))
+print(type(4 -4j))
+print(type(['Asabeneh', 'Python','Finland']))
+print(type('Wagner'))
+print(type('Moreira Cavalcante Junior'))
+print(type('Brasil'))
+
