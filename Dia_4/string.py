@@ -227,7 +227,7 @@ print(challenge.isalnum()) # False, space is not an alphanumeric character
 challenge = 'thirty days of python 2019'
 print(challenge.isalnum()) # False
 
-# ispalha()
+# isalpha()
 #checks if all string elements are alphabet
 challenge = 'thirty days of python'
 print(challenge.isalpha()) # False, space is once again excluded
