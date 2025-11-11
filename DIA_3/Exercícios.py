@@ -56,14 +56,14 @@ print("A inclinação é: ", y)
 #(m = y2-y1/x2-x1)
 #ponto (2, 2) e o ponto (6, 10)
 x1, y1 = 2, 2
-x2, y2 = 6, 10
+x2, y2 = 6, 12
 
 inclinação = (y2 - y1)/(x2 - x1)
 distancia_euclidiana = math.sqrt((x2 - x1)**2) + ((y2 - y1)**2)
 print("inclinação e distancia euclidiana dos pontos(2, 2) e (6, 10)", inclinação, distancia_euclidiana)
 
 print(y == inclinação)
-
+#
 x = int(input("Digite o valor de x: "))
 y = (x**2) + (6*x) + 9
 print("o valor de y é: ", y)
