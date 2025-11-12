@@ -46,3 +46,51 @@ print(person)
 dct['key1'] = 'value-one'
 person['first_name'] = 'Wagner'
 person['age'] = 69
+
+# Checking Keys in a Dictionary
+# In operator
+print('key1' in dct)
+print('key19' in dct)
+
+# Removing Key and Values Pairs from a Dictionary
+# pop(key): removes the item with the specified key name
+# popitem(): removes the last item
+# del: removes an item with specified key name
+dct = {'key1':'value1', 'key2':'value2', 'key3':'value3', 'key4':'value4'}
+dct.pop('key1') #removes the item key1
+dct = {'key1':'value1', 'key2':'value2', 'key3':'value3', 'key4':'value4'}
+dct.popitem() #removes the last item
+del dct['key2']
+
+person.pop('first_name')
+person.popitem()
+del person['is_married']
+print(person)
+
+# Changing Dictionary to a list of items
+# the items() method changes dictionary to a list of tuples
+dct = {'key1':'value1', 'key2':'value2', 'key3':'value3', 'key4':'value4'}
+print(dct.items()) 
+
+# Clearing a Dictionary
+print(dct.clear())
+
+# Delting a Dictionary
+# syntax
+dct = {'key1':'value1', 'key2':'value2', 'key3':'value3', 'key4':'value4'}
+del dct
+
+# Copy a Dictionary
+# We can copy a dictionary using a copy() method.
+# Using copy avoids mutation of the original dicitionary
+dct = {'key1':'value1', 'key2':'value2', 'key3':'value3', 'key4':'value4'}
+dct_copy = dct.copy()
+
+# Getting Dictionary Keys as a List
+# The keys() methods give us all the keys of a dictionary as a list
+keys = dct.keys()
+print(keys)
+
+# Getting Dictionary Values as a List
+values = dct.values()
+print(values)
