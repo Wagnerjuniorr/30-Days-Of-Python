@@ -298,7 +298,7 @@ def is_valid(variable):
         return 'not valid'
     if variable == 'None':
         return 'not valid'
-    return 'It is valid'
+    return 'Its valid'
 #i did only some keywords because yeah
 print(is_valid('foroar'))
 
