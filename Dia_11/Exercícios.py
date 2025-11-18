@@ -168,7 +168,7 @@ def is_empty(data):
 print(is_empty(lista))
 print(is_empty(empty))
 # Write different functions which take lists. They should calculate_mean, calculate_median, calculate_mode, calculate_range, calculate_variance, calculate_std (standard deviation).
-list_of_numbers = [1,10,2,3,4,5,6,7,7,7,8,9,10]
+list_of_numbers = [1,2,3,4,5,6,7,8,9,10]
 def calculate_mean(list_of_numbers):
     sum = 0
     for num in list_of_numbers:
@@ -205,8 +205,102 @@ def calculate_mode(list_of_numbers):
     return 'The mode is', mode
 print(calculate_mode(list_of_numbers))
 
+def calculate_range(list_of_numbers):
+    maximun = max(list_of_numbers)
+    minimun = min(list_of_numbers)
+    return maximun - minimun
+print(calculate_range(list_of_numbers))
 
+def calculate_variance(list_of_numbers):
+    mean = calculate_mean(list_of_numbers)#primeiro devemos pegar a média da lista
+    soma = 0
+    for num in list_of_numbers: 
+        desvio = mean - num # Depois devemos calcular o desvio de cada ponto ( o quão longe cada valor está da média)
+        desvio = desvio * desvio # Elevar ao quadrado cada desvio( para tirar o símbolo de negativo )
+        soma += desvio # Somar todos os desvios ao quadrado #poderia ter feito isso na linha superior mas não quis
+    variance = soma / len(list_of_numbers) 
+    return variance
+print(calculate_variance(list_of_numbers))
 
+def calculate_std(list_of_numbers):
+    variance = calculate_variance(list_of_numbers)
+    desvio_padrao = math.sqrt(variance)
+    return desvio_padrao
+print(calculate_std(list_of_numbers))
+
+# Exercises: Level 3
+# Write a function called is_prime, which checks if a number is prime.
+def is_prime(num):
+    if num  <= 1: # se for menor que 1 n é primo
+        return False
+    if num == 2: # se for == a 2 é primo 
+        return True
+    if num % 2 == 0: # e for divisivel por 2 não é primo
+        return False
+    
+    limite = int(math.sqrt(num)) # aqui pegamos a raíz do num
+    for i in range(3,limite + 1, 2): # aqui iteramos por todos os números impares pulando de 2 em 2 e dividimos até chegar na raíz
+        if num % i ==0 :
+            return False
+    return True
+print(is_prime(503))
+
+# Write a functions which checks if all items are unique in the list.
+def is_unique(list_of_numbers):
+    dct = {}
+    for n in list_of_numbers:
+        if n in dct:
+            dct[n] += 1
+        else:
+            dct[n] = 1
+    for key,value in dct.items():
+        if value > 1: # se o valor for maior que 1, quer dizer que esse item se repitiu mais de uma vez e não único
+            not_unique_item = key
+            return 'This list is not unique', not_unique_item 
+    return 'This list is unique'
+fruits= ['banana','uva','morango','banana',1]
+print(is_unique(fruits)) 
+
+# Write a function which checks if all the items of the list are of the same data type.
+def is_same_data_type(list_of_numbers):
+    n = 0
+    while n < len(list_of_numbers)-1:
+        if type(list_of_numbers[n]) == type(list_of_numbers[n+1]):
+            n += 1
+            continue
+        else: 
+            return 'This list not have the same data type'
+    return 'This list have the same data type'
+print(is_same_data_type(fruits))
+
+# Write a function which check if provided variable is a valid python variable
+def is_valid(variable):
+    if variable[0].isdigit():
+            return 'not valid'
+    for valid in variable:
+        if valid == '-':
+            return 'not valid'
+        elif valid == ' ':
+            return 'not valid'
+    if variable == 'if':
+        return 'not valid'
+    if variable == 'for':
+        return 'not valid'
+    if variable == 'while':
+        return 'not valid'
+    if variable == 'class':
+        return 'not valid'
+    if variable == 'def':
+        return 'not valid'
+    if variable == 'True':
+        return 'not valid'
+    if variable == 'False':
+        return 'not valid'
+    if variable == 'None':
+        return 'not valid'
+    return 'It is valid'
+#i did only some keywords because yeah
+print(is_valid('foroar'))
 
 
 
