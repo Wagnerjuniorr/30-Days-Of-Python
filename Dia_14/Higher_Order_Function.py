@@ -46,7 +46,7 @@ print(result(-3))
 result = higher_order_function('add')
 print(result(1,3))
 # Nesse exemplo vimos que a função higher orde function retorna diferente funções dependendo do resultado
-# result vira uma cópia das funções acima, ou no caso do lambda vira um cópia da funç]ao anonima
+# result vira uma cópia das funções acima, ou no caso do lambda vira um cópia da função anonima
 
 # Python Closures
 # Python allow a nested function to acess the outer scope of the enclosing function. 
@@ -160,21 +160,57 @@ def print_full_name(first_name,last_name,country):
 
 print_full_name('PO','IA','CACA')
 
+# BUILT-IN HIGHER ORDER FUNCTIONS
+# Some of the Built-in higher function that we cover in this part are map(), filter, reduce.
+# Lambda function can be passed as a parameter and the best use case of lambda is in funtions like map, filter and reduce
+# The map() function is a built-in function that takes a function and iterable as parameters
+# map(function, iterable)
 
+numbers = [1,2,3,4,5]
+def square(x):
+    return x ** 2
+numbers_squared = map(square, numbers)
+print(list(numbers_squared))
+# Lets apply it with a lambda function
+numbers_squared = map(lambda x : x ** 2, numbers)
+print(list(numbers_squared))
 
+numbers_str = ['1','2','3','4','5']
+numbers_int = map(int, numbers_str)
+print(numbers_int)
+print(list(numbers_int))
+# o list() é usado pra poder concretizar o valor 
+print(list(numbers_int))
 
+names = ['Asabeneh', 'Lidiya', 'Ermias', 'Abraham']
+name_upper_cased = map(lambda name: name.upper(), names)
+print(list(name_upper_cased))
 
-nums = [3,1,3]
-target = 6
-def sum_of_index_to_target(lista,target):
-    i , j = 0, 1
-    index = []
-    while i<len(lista):
-        while j<len(lista):
-            if target == lista[i]+lista[j]:
-                index.append(i)
-                index.append(j)
-                return index
-            j += 1
-    i += 1        
-print(sum_of_index_to_target(nums, target))
+# Python, Filter Function
+# the filter() call the specified function which returns boolean for each item of the specified iterable (list)
+# filter(function, iterable)
+numbers = [1,2,3,4,5]
+def is_even(num):
+    if num % 2 == 0:
+        return True
+    return False
+even_numbers = filter(is_even,numbers)
+print(list(even_numbers))
+
+names = ['Asabeneh', 'Lidiya', 'Ermias', 'Abraham'] 
+def is_name_long(name):
+    if len(name) > 7:
+        return True
+    return False
+long_names = filter(is_name_long,names)
+
+# Python - Redeuce Function
+# The reduce() function is defined in the functools module and we should import it from this module
+# Like map and filter it takes two parameters, a function and an iterable
+# However, it does not return another iterable, instead it returns a single value
+from functools import reduce
+numbers_str =  ['1', '2', '3', '4', '5'] # iterable
+def add_two_nums(x, y):
+    return int(x) + int(y)
+total = reduce(add_two_nums, numbers_str)
+print(total)
