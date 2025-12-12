@@ -1,5 +1,5 @@
 # In python function are treated as first cllas citzen, allowing you to perform the following operations on functions
-# a functiona can take one or moe functions as parameters
+# a function can take one or moe functions as parameters
 # a function can be returned as a result of another function
 # a function can be modified
 # a function can be assigned to a variable
@@ -28,6 +28,7 @@ def absolute(x):
         return x
     else:
         return -(x)
+print('aaaaaaaaaaaaaaaaaaaaaaaaaaaaa')
 def higher_order_function(type):
     if type == 'square':
         return square
