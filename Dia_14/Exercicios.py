@@ -156,7 +156,7 @@ def categorize_countries(countries):
 
     for country in countries:
         if 'land' in country:
-            if 'island' in country:
+            if 'Island' in country:
                 island_countries.append(country)
             land_countries.append(country)
         elif 'ia' in country:
@@ -169,3 +169,79 @@ def categorize_countries(countries):
 
 all_countries = categorize_countries(countries)
 print(all_countries)
+
+# Create a function returning a dictionary, 
+# where keys stand for starting letters of countries 
+# and values are the number of country names starting with that letter.
+
+def dict_starting_letters(countries):
+    start = {}
+    for items in countries:
+        if items[0] in start:
+            start[items[0]] +=1
+        else:
+            start[items[0]] = 1
+    return start
+starting_letter = dict_starting_letters(countries)
+print(starting_letter)
+
+# Declare a get_first_ten_countries function - it returns a list of first ten countries from the countries.js list in the data folder.
+def get_first_ten_countries(countries):
+    count = 0
+    ten_countries = []
+    while count < 10:
+        ten_countries.append(countries[count])
+        count+=1
+    return ten_countries
+print(get_first_ten_countries(countries))
+
+# Declare a get_last_ten_countries function that returns the last ten countries in the countries list.
+def get_last_ten_countries(countries):
+    num = len(countries)-1
+    count = 0
+    ten_countries = []
+    while count < 10:
+        ten_countries.append(countries[num])
+        num -= 1
+        count += 1
+    return ten_countries
+print(get_last_ten_countries(countries))
+
+# Exercises: Level 3
+# Use the countries_data.py  file and follow the tasks below:
+from all_countries_data import countries_data
+# Sort countries by name, by capital, by population
+sorted_countries = []
+for item in countries_data:
+    for key, value in item.items():
+        if key == 'name':
+            sorted_countries.append(value)
+sorted_countries.sort()
+print(sorted_countries)   
+
+# Sort out the ten most spoken languages by location
+most_ten_spoken_languages = {}
+for item in countries_data:
+    for key, value in item.items():
+            population = item.get('population',0)# caso a chave n exista usa 0 como valor padrão
+            if key == 'languages':
+                for lng in value:
+                    most_ten_spoken_languages[lng] = most_ten_spoken_languages.get(lng,0) +population
+# não sei fazer a separação de top 10
+print('as 10 linguas mais faladas:',most_ten_spoken_languages)
+
+# Sort out the ten most populated countries.
+most_populated_countries = {}
+for item in countries_data:
+    for key, value in item.items():
+        population = item.get('population')
+        if key == 'name':
+            most_populated_countries[value] = population
+top_10_by_population = sorted(most_populated_countries.items(),key=lambda kv :kv[1], reverse= True)[:10]
+# primeiro o dicionário é transformado em um lista de tupla, já que o método sorted só funciona dessa sobre essa condição
+# key é o que diz ao python qual parte de cada item deve ser usada para comparação
+# kv é uma variável temporária que representa cada tupla(idioma, população total) durante a ordenação
+# kv[1] acessa o segundo elemento da tupla, que é a população total acumulada
+# reverse = true inverte a ordem padrão, maior para menor
+# [:10] separa a pena os 10 primeiros
+print('os países com maior população:', top_10_by_population)
