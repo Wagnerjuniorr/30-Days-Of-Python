@@ -2928,6 +2928,92 @@ print(most_populated_countries(countries_data,10))
 
 # Exercises: Level 2
 # Extract all incoming email addresses as a list from the email_exchange_big.txt file.
+import re, string
 with open('files/email_exchange.txt', 'r') as f:
     emails = f.read()
-print(emails) 
+words = emails.split()
+email_address = []
+for wd in words:
+    if '@' in wd:
+        email_address.append(wd)
+print(email_address)
+
+# Find the most common words in the English language. Call the name of your function find_most_common_words, it will take two parameters - a string or a file and a positive integer, indicating the number of words. Your function will return an array of tuples in descending order. Check the output
+def find_most_common_words(string, number_of_words):
+    most_common_words_dict = {}
+    for wd in words:
+        if wd not in most_common_words_dict:
+            most_common_words_dict[wd] = 1
+        else:
+            most_common_words_dict[wd] += 1
+    most_common_words_tuple =  sorted(most_common_words_dict.items(), key=lambda kv:kv[1], reverse=True)[:number_of_words]
+    return most_common_words_tuple
+print(find_most_common_words(words,10))
+# Use the function, find_most_frequent_words to find: a) The ten most frequent words used in Obama's speech b) The ten most frequent words used in Michelle's speech c) The ten most frequent words used in Trump's speech d) The ten most frequent words used in Melina's speech
+words = text_obama.split()
+print(find_most_common_words(words, 10))
+words = text_donald.split()
+print(find_most_common_words(text_donald,10))
+words = text_melina.split()
+print(find_most_common_words(text_melina,10))
+words = text_michelle.split()
+print(find_most_common_words(text_michelle,10))
+
+# Write a python application that checks similarity between two texts. It takes a file or a string as a parameter and it will evaluate the similarity of the two texts. For instance check the similarity between the transcripts of Michelle's and Melina's speech. You may need a couple of functions, function to clean the text(clean_text), function to remove support words(remove_support_words) and finally to check the similarity(check_text_similarity). List of stop words are in the data directory
+def clean_text(text):
+    cleaned_text = re.findall(r'\b\w+\b',text.lower())
+    return cleaned_text
+
+def remove_support_words(text):
+    support_words = ['i','me','my', 'myself', 'we', 'our', 'ours', 'ourselves', 'you', "you're", "you've", "you'll", "you'd", 'your', 'yours', 'yourself', 'yourselves', 'he', 'him', 'his', 'himself', 'she', "she's", 'her', 'hers', 'herself', 'it', "it's", 'its', 'itself', 'they', 'them', 'their', 'theirs', 'themselves', 'what', 'which', 'who', 'whom', 'this', 'that', "that'll", 'these', 'those', 'am', 'is', 'are', 'was', 'were', 'be', 'been', 'being', 'have', 'has', 'had', 'having', 'do', 'does', 'did', 'doing', 'a', 'an', 'the', 'and', 'but', 'if', 'or', 'because', 'as', 'until', 'while', 'of', 'at', 'by', 'for', 'with', 'about', 'against', 'between', 'into', 'through', 'during', 'before', 'after', 'above', 'below', 'to', 'from', 'up','down', 'in', 'out', 'on', 'off', 'over', 'under', 'again', 'further', 'then', 'once', 'here', 'there', 'when', 'where', 'why', 'how', 'all', 'any', 'both', 'each', 'few', 'more', 'most', 'other', 'some', 'such', 'no', 'nor', 'not', 'only', 'own', 'same', 'so', 'than', 'too', 'very', 's', 't', 'can', 'will', 'just', 'don', "don't", 'should', "should've", 'now', 'd', 'll', 'm', 'o', 're', 've', 'y', 'ain', 'aren', "aren't", 'couldn', "couldn't", 'didn', "didn't", 'doesn', "doesn't", 'hadn', "hadn't", 'hasn', "hasn't", 'haven', "haven't", 'isn', "isn't", 'ma', 'mightn', "mightn't", 'mustn', "mustn't", 'needn', "needn't", 'shan', "shan't", 'shouldn', "shouldn't", 'wasn', "wasn't", 'weren', "weren't", 'won', "won't", 'wouldn', "wouldn't"]
+    filtered_words = [w for w in text if w not in support_words]
+    return filtered_words
+
+def uniquify_words(text):
+    return set(text)
+
+def check_text_similiarity(text_One, text_Two):
+    # checha a interseção (palavras que aparecem nos dois)
+    intersection = text_One.intersection(text_Two)
+    # checa a união(palavras únicas dos dois)
+    union = text_One.union(text_Two)
+    return len(intersection)/len(union)
+
+text_michelle = clean_text(text_michelle)
+text_michelle = remove_support_words(text_michelle)
+text_michelle = uniquify_words(text_michelle)
+
+text_melina = clean_text(text_melina)
+text_melina = remove_support_words(text_melina)
+text_melina = uniquify_words(text_melina)
+
+print(check_text_similiarity(text_michelle, text_melina))
+
+# Find the 10 most repeated words in the romeo_and_juliet.txt
+with open('files/romeo_and_juliet.txt', 'r') as f:
+    romeo_and_juliet_txt = f.read()
+print(find_most_common_words(romeo_and_juliet_txt,10))
+# Read the hacker news csv file and find out: 
+# a) Count the number of lines containing python or Python 
+# b) Count the number lines containing JavaScript, javascript or Javascript 
+# c) Count the number lines containing Java and not JavaScript
+import csv
+with open('files/hacker_news.csv',mode='r', newline= '') as f:
+    csv_reader = csv.reader(f)
+    count_line_python, count_line_Javascript, count_line_Java_only = 0,0,0
+    for row in csv_reader:
+        for r in row:
+            if 'python' in r:
+                count_line_python +=1
+            elif 'JavaScript' in r:
+                count_line_Javascript += 1
+            elif 'Java' in r:
+                count_line_Java_only += 1
+    print(count_line_python, count_line_Javascript, count_line_Java_only)
+targets = {
+    'Python': re.compile(r'\bpython\b', re.IGNORECASE),
+    'JavaScript': re.compile(r'\bjavascript\b', re.IGNORECASE),
+    'Java': re.compile(r'\bjava\b', re.IGNORECASE)
+}
+
+counts = {lang: 0 for lang in targets}
